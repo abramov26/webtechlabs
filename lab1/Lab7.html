@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>        
+        function school_sub() {                    
+            subjects = new Array("математика","физика","химия","информатика","философия","психология");                    
+            var hard_sci = new Array;                    
+            hard_sci = subjects.slice(0, 3);                    
+            var human_sci = new Array;                    
+            human_sci = subjects.slice(4, 7);                                       
+            document.write("Точные науки: " + hard_sci + "<br>");
+            document.write("Точные науки: " + human_sci + "<br>");        
+        }        
+    </script> 
+</head>
+<body>
+    <script>                    
+        year=new Array("декабрь","январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь");                      
+        summer=new Array(); //летние месяцы                    
+        summer=year.slice(6,9);                    
+        document.write(summer+"<br>");        
+        school_sub();
+    </script>
+    <a href="javascript:history.back()">← Назад</a>
+</body>
+</html>

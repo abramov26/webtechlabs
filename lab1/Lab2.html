@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Абзац 1</p>
+
+    <script src="lab2.js"></script> 
+    <script>
+    document.getElementsByTagName("p")[0]
+    .insertAdjacentHTML("afterend", "<form><label>приветствую!</label><input type='button' value='OK'></form>");
+    var form = document.forms[0];
+    form.addEventListener("click", helloMsg);
+    </script> 
+    
+    <p>Абзац 2</p>
+
+    <a href="javascript:history.back()">← Назад</a>
+</body>
+</html>

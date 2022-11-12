@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+    var rez=0;
+    document.write(`<table border="1"><tr><th>Степень</th><th>Результат</th></tr>`);
+
+    for (var i=0; i<=5; i++) {
+      document.write(`<tr><td>2<sup><small>${i}</small></sup></td><td>${Math.pow(2,i)}</td></tr>`);
+    } 
+    document.write(`</table>`);
+    </script>
+    <a href="javascript:history.back()">← Назад</a>
+</body>
+</html>
