@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="/jquery-3.6.1.min.js"></script>
+	<title>Новости</title>
+</head>
+<body>
+	<div id="wrapper">
+		<header class="head">
+			<div align="center" class="logo">      
+				<h1>Веб-технологии, Лабораторная работа №3</h1>
+				<h2>Абрамов Владислав, ФИРТ ПИ-323</h2><br>
+				<h2>Новости</h2>
+				<br><br>
+			</div>
+		</header>
+		<div align="right">
+			<a style="text-decoration: none;  color: black; border: 2px solid black; padding: 10px;" href="index-b.html">Написать отзыв</a>
+		</div>
+		<br>
+		<h2>Новости</h2>
+		<br>
+		<div id="content">
+			<div class="recent">
+				<div class="post"> <h2>Первая новость</h2><p  align="left">Это случилось<br><img src="/img/numero-uno.jpg" alt=""></p><div class="break"></div></div><hr>
+				<div class="post"> <h2>Вторая новость</h2><p  align="left">Очень неожиданная<br><img src="/img/number-2.png" alt=""></p><div class="break"></div></div><hr>
+			</div>
+			<input type="button" id="getUser" value="Показать еще"/>
+		</div>
+	</div>
+	<script>
+		$(document).ready(function(){
+			$('#getUser').on('click',function(){
+				var tek = $('.post').length;
+				var kol = 5;
+				$.ajax({
+					type:'GET',
+					url:'getdata.php',
+					dataType: "json",
+					data:{startId:tek, endId:tek+kol},
+					success:function(data){
+						console.log(data);
+
+						for (var i=0;i<5;i++){
+							const isEmpty = Object.keys(data).length === 0;
+							console.log(isEmpty); 
+							if (isEmpty) alert ("Больше новостей нет");
+							if (isEmpty) break;
+							$('.recent').append('<div class="post"> <h2>'+data[i].headline+
+								'</h2><p>'+ data[i].body + '<br><img src="'+ data[i].related_image+'" alt=""></p><div class="break"></div></div><hr>');
+						}
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>

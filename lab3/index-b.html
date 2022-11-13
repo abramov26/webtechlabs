@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="/jquery-3.6.1.min.js"></script>
+	<title>Отзывы</title>
+</head>
+<body>
+	<div id="wrapper">
+		<header class="head">
+			<div align="center" class="logo">
+				<h1>Веб-технологии, Лабораторная работа №3</h1>
+				<h2>Абрамов Владислав, ФИРТ ПИ-323</h2><br>
+				<h2>Отзывы</h2>
+				<br><br>
+			</div>
+		</header>
+		<div align="right">
+			<a style="text-decoration: none;  color: black; border: 2px solid black; padding: 10px;" href="index.html">← К новостям</a>
+		</div>
+		<br>
+		<h2>Написать отзыв</h2>
+		<br>
+		<div id="content">
+			<div class="recent">
+				<div class="single">
+					<p>Оставьте отзыв</p>
+				</div>
+				<div id="comments">
+					<div id="respond">
+						<p>
+							Имя *&nbsp;&nbsp;&nbsp;<input type="text" name="author" id="author" value="" size="22" tabindex="1">
+							<label for="author"></label>
+						</p>
+						
+						<p>
+							Отзыв*
+							<textarea name="comment" id="comment" cols="60" rows="10" tabindex="4"></textarea>
+						</p>
+						
+						<p>
+							<input id="datepub" type="hidden" value="2022-05-20">
+						</p>
+						
+						<p>
+							<button id="confirm">Отправить</button>
+						</p>
+
+					</div>
+				</div>
+				<div id="comments">
+					<input id="msgid" type="hidden">
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(document).ready(function () {
+			$('#msgid').val(0);
+			load();
+
+			function load() {
+				$.ajax({
+					type: 'GET',
+					url: 'getdata-b.php',
+					dataType: "json",
+					success: function (data) {
+						if (data.comments_count >= parseInt($('#msgid').val())) {
+							for (var i = parseInt($('#msgid').val()); i < data.comments_count; i++) {
+								$('#comments').append('<div class="msg">Имя: ' + data[i].username +'</div>Отзыв:' + data[i].message +
+									'<p  align="right">' + data[i].created_at + '</p></div><hr>');
+							}
+							$('#msgid').val(data.length);
+						}
+					}
+				});
+			};
+
+			$('#confirm').on('click', function () {
+				var checker = true;
+				var username = $('#author').val();
+				var comment = $('#comment').val();
+				var todaysDate = new Date();
+				var created_at = todaysDate.toISOString().split('T')[0];
+				if ($('#author').val() == '' || $('#author').val().length < 2) {
+					checker = false;
+				}
+				if ($('#comment').val() == '' || $('#comment').val().length < 4) {
+					checker = false;
+				}
+				if (checker == true) {
+					$.ajax({
+						type: 'POST',
+						url: 'setdata-b.php',
+						data: {
+							username: username,
+							comment: comment,
+							created_at: created_at
+						},
+						success: function () {
+							alert("Отзыв добавлен!");
+							location.reload();
+						}
+
+					});
+				} else {
+					alert("Отзыв не отправлен, проверьте правильность ввода полей!");
+				}
+			});
+		});
+	</script>
+</body>
+</html>
