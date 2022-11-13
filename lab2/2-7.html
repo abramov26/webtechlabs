@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="/jquery-3.6.1.min.js"></script>
+	<title>2-7</title>
+	<style>
+		body{
+			background-color: #eaeaea;
+		}
+		.calculator{
+			width: 200px;
+			height: 195px;
+			border: 2px solid #333;
+			margin: 100px auto 0;
+			text-align: center;
+			border-radius: 1px;
+			background-color: #333;
+		}
+		#buttons {
+			width: 200px;
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+		}
+
+		.button {
+			height: 30px;
+		}
+
+		.equal {
+			grid-column: 2/5;
+		}
+		.zero {
+			grid-column: 1/2;
+		}
+
+		#input {
+			width: 185px;
+			padding-right: 10px;
+			font-size: 3em;
+			text-align: right;
+			height: 40px;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			color: black;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<div class="calculator" align="center">
+		<div align="center" class="calc">
+			<input type="text" id="input">
+			<div id='buttons'>
+				<input type="button" value="C" class="button clear">
+				<input type="button" value="<--" class="button remove">
+				<input type="button" value="/" class="button button-operator">
+				<input type="button" value="*" class="button button-operator">
+
+				<input type="button" value="7" class="button  button-num">
+				<input type="button" value="8" class="button button-num">
+				<input type="button" value="9" class="button  button-num">
+				<input type="button" value="-" class="button button-operator">
+
+				<input type="button" value="4" class="button button-num">
+				<input type="button" value="5" class="button button-num">
+				<input type="button" value="6" class="button button-num">
+				<input type="button" value="+" class="button button-operator">
+
+				<input type="button" value="1" class="button button-num">
+				<input type="button" value="2" class="button button-num">
+				<input type="button" value="3" class="button button-num">
+				<input type="button" value="." class="button button-num ">
+				<input type="button" value="0" class="button button-num zero">
+				<input type="button" value="=" class="button equal">
+			</div>
+		</div>
+	</div>
+	<br><br><a href="javascript:history.back()">← Назад</a>
+	<script>
+			$(".equal").click(
+				function () {
+					try {
+						if ($("#input").val()) {
+							$("#input").val(eval($("#input").val()))
+						} else {
+							return false
+						}
+					} catch (error) {
+						alert("Введите валидные значения")
+					}
+				})
+
+			$(".button-operator").click(function (item) {
+				$("#input").val($("#input").val() + item.target.value)
+			})
+
+
+			$(".button-num").click(function (item) {
+				$("#input").val($("#input").val() + item.target.value)
+			})
+
+			$(".clear").click(function () {
+				$("#input").val('')
+			})
+
+			$(".remove").click(function () {
+				$("#input").val($("#input").val().substring(0, $("#input").val().length - 1))
+			})
+	</script>
+</body>
+</html>

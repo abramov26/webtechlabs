@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="/jquery-3.6.1.min.js"></script>
+	<title>2-1</title>
+</head>
+<body>
+	<button type="button" id="color_change_button">Поменять цвет</button>
+	<br><br><a href="javascript:history.back()">← Назад</a>
+	<script>
+		var colors = ['blue', 'grey', 'black', 'white', 'red', 'green', '#aaa', '#FFAACC', 'rgb(122,111,110)'];
+		var body = document.getElementsByTagName('body')[0];
+
+		$(document).ready(function() {
+			$('#color_change_button').click(function(){
+				body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+			});
+		});
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="/jquery-3.6.1.min.js"></script>
+	<title>2-2</title>
+</head>
+<body>
+	<div>Ваше имя* <input type="text" id="nameform"></div><br>
+	<div>Пароль* <input type="password" id="passform"></div><br>
+	<div>Подтверждение пароля* <input type="password" id="passformConfirm"></div><br>
+	<div>Email* <input type="text" id="emailform"></div><br>
+	<div>Тема сообщения <input type="text" id="messagetopicform"></div><br>
+	<div>Сообщение <input type="text" id="messageform"></div><br>
+	<button class="send_button">Отправить</button>
+	<button class="clear">Очистить</button>
+	<br><br><a href="javascript:history.back()">← Назад</a>
+	<script>
+		$(".send_button").click(function(){
+			var checker = true;
+			if ($('#nameform').val() == '') {
+				$('#nameform').css('border-color', '#FF18C0');
+				checker = false;
+			}
+			else {
+				$('#nameform').css('border-color', '');
+			}
+			if ($('#passform').val().length < 4 || $('#passformConfirm').val() != $('#passform').val()) {
+				$('#passform').css('border-color', '#FF18C0');
+				$('#passformConfirm').css('border-color', '#FF18C0');
+				checker = false;
+			}
+			else {
+				$('#passform').css('border-color', '');
+				$('#passformConfirm').css('border-color', '');
+			}
+			if ($('#emailform').val().length < 5 || !$('#emailform').val().includes("@")) {
+				$('#emailform').css('border-color', '#FF18C0');
+				checker = false;
+			}
+			else {
+				$('#emailform').css('border-color', '');
+			}
+			if ($('#messageform').val().length < 10 ) {
+				$('#messageform').css('border-color', '#FF18C0');
+				checker = false;
+			}
+			else {
+				$('#messageform').css('border-color', '');
+			}
+			if (checker == true){
+				alert("Данные отправлены!");
+			}
+		});
+		$(".clear").click(function(){
+			$('#nameform').val('');
+			$('#passform').val('');
+			$('#passformConfirm').val('');
+			$('#emailform').val('');
+			$('#messagetopicform').val('');
+			$('#messageform').val('');
+		});
+	</script>
+</body>
+</html>

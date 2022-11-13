@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="/jquery-3.6.1.min.js"></script>
+	<title>2-6</title>
+</head>
+<body>
+	<div>Сколько государств существует в мире (входящих в состав ООН)?</div><br>
+	<div> <input type="radio" name="choice" id="choice1"> 193</div><br>
+	<div> <input type="radio" name="choice" id="choice2"> 173</div><br>
+	<div> <input type="radio" name="choice" id="choice3"> 195</div><br>
+	<div> <input type="radio" name="choice" id="choice4"> 208</div><br>
+	<button class="submit_button">Отправить ответ</button><br><br>
+	Всего  - <input value="0" id="resultNum" style="width:30px;" readonly> ответа<br>
+	<input value="0" id="realResult1" style="width:30px;" readonly>% за  193
+	<input value="0" id="result1" type="hidden"><br>
+	<input value="0" id="realResult2" style="width:30px;" readonly>% за  173
+	<input value="0" id="result2" type="hidden"><br>
+	<input value="0" id="realResult3" style="width:30px;" readonly>% за  195
+	<input value="0" id="result3" type="hidden"><br>
+	<input value="0" id="realResult4" style="width:30px;" readonly>% за  208
+	<input value="0" id="result4" type="hidden"><br>
+	<br><br><a href="javascript:history.back()">← Назад</a>
+	<script>
+		$(".submit_button").click(function(){
+			var totalNum=0;
+			for (var i=1;i<=4;i++){
+				totalNum=totalNum+parseInt($('#result'+i).val());
+			}
+			for (var i=1;i<=4;i++){
+				var radioIsChecked = $('#choice'+i).prop('checked');
+				if (radioIsChecked == true){
+					$('#result'+i).val((parseInt($('#result'+i).val())+1).toString());
+					totalNum++;
+					$('#resultNum').val(totalNum.toString());
+				}
+			}
+			for (var i=1;i<=4;i++){
+				$('#realResult'+i).val(Math.round((parseInt($('#result'+i).val())/totalNum*100)).toString());
+			}
+		});
+	</script>
+</body>
+</html>
