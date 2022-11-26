@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="/jquery-3.6.1.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>Бросание кубиков (ПИ-323 ВТ ЛР№5 Абрамов)</title>
+</head>
+<body>
+	<div id="wrapper">
+		<div class="game">
+			<h2>Веб-технологии, ЛР №5 (Вариант 3) <br><br>Бросание кубиков</h2>
+			<h3>Игра с компьютером до 6-ти побед</h3>
+			<h3>Вы можете выбрать количество кубиков</h3>
+			<h3>Нажмите кнопку «Начать игру»</h3> 
+			<div id="picker_div"><select id="kol">
+				<option value="1">1 кубик</option>
+				<option value="2" selected="selected">2 кубика</option>
+				<option value="3">3 кубика</option>
+				<option value="4">4 кубика</option>
+				<option value="5">5 кубиков</option>
+			</select></div>
+			<p><button id="confirm" class="btn">Начать игру</button></p>
+
+			<table align="center" width="100%" cellspacing="1" cellpadding="1" border="1">
+				<tr id="my1">
+				</tr>
+				<tr id="comp1">
+				</tr>
+			</table><br>
+			<table align="center" width="100%" cellspacing="1" cellpadding="1" border="1">
+				<tr>
+					<th>Кол-во ваших побед</th>
+					<th>Кол-во побед компьютера</th>
+				</tr>
+				<tr>
+					<td><div id="wer"/>0</td>
+					<td><div id="asd"/>0</td>
+				</tr>
+
+			</table>
+		</div>
+
+	</div>
+	<script>
+		function randomInteger(min, max) {
+			var rand = min - 0.5 + Math.random() * (max - min + 1);
+			return Math.round(rand);
+		}
+
+		$(document).ready(function(){
+			$('#confirm').on('click', function () {
+				var comp= '<td width="70px"><strong>Компьютер</strong></td>';
+				var my = '<td width="70px"><strong>Вы</strong></td>';
+				var w = '<td>0</td>';
+				var l = '';
+				var sumM = 0;
+				var sumC = 0;
+				var wins = 0;
+				var loses = 0;
+				var win = $('#wer').text();
+				console.log('win = $(#wer).text()=',win);
+				var lose = $('#asd').text();
+				console.log('lose = $(asd).text()=',lose);
+				var arrM = [];
+				var arrC = [];
+
+				for (var i = 0; i <= $('#kol').val()-1; i++) {
+					arrM[i] = randomInteger(1, 6);
+					arrC[i] = randomInteger(1, 6);
+				}
+
+				for (var i = 0; i< arrM.length; i++  ) {
+					if (arrM[i]!==undefined) {
+						my +='<td>'+arrM[i]+'</td>';
+						sumM = sumM+arrM[i];
+					}
+					if (arrC[i]!==undefined) {
+						comp +='<td>'+arrC[i]+'</td>';
+						sumC = sumC+arrC[i];
+					}
+				}
+				my1.innerHTML = my+='<td>='+sumM+'</td>';
+				comp1.innerHTML = comp+='<td>='+sumC+'</td>';
+				if (sumM>sumC ) {
+					wins=parseInt(win)+1;
+					console.log('win+1=',win+1);
+					console.log('Pwins=',wins);
+
+					wer.innerHTML = wins;
+
+				} else if ( sumM<sumC ) {
+					loses=parseInt(lose)+1;
+					console.log(loses);
+					console.log('lose+1=',lose+1);
+					console.log('loses=',wins);
+					asd.innerHTML = loses;
+				}
+				if ($('#wer').text()==6 ) {
+					alert('Вы победили');
+					document.location.reload();
+				} else if ( $('#asd').text()==6 ){
+					alert('Вы проиграли');
+					document.location.reload();
+				}
+
+			});
+
+		});
+	</script>
+</body>
+</html>
